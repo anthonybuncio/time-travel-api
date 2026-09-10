@@ -72,10 +72,10 @@ describe('findHolidayMatch', () => {
     expect(match!.offset).toBe(0)
   })
 
-  it('matches Black Friday (Thanksgiving +1)', () => {
+  it('matches Black Friday (Thanksgiving +1) as its own holiday', () => {
     const match = findHolidayMatch(new Date(2025, 10, 28))
-    expect(match!.holiday.id).toBe('thanksgiving')
-    expect(match!.offset).toBe(1)
+    expect(match!.holiday.id).toBe('black-friday')
+    expect(match!.offset).toBe(0)
   })
 
   it('matches Christmas Day exactly', () => {
@@ -117,13 +117,13 @@ describe('findHolidayMatch', () => {
   })
 
   it('respects windowDays override (tighter window excludes border dates)', () => {
-    // Easter 2025 = Apr 20; Palm Sunday (Apr 13) is −7 days
+    // Easter 2025 = Apr 20; Apr 11 is −9 days and outside Tax Day's (Apr 15) ±2 window
     // Default window is 10, so it would be included
-    const withDefault = findHolidayMatch(new Date(2025, 3, 13))
+    const withDefault = findHolidayMatch(new Date(2025, 3, 11))
     expect(withDefault!.holiday.id).toBe('easter')
 
-    // Override to 3: Apr 13 is outside the window
-    const withOverride = findHolidayMatch(new Date(2025, 3, 13), 3)
+    // Override to 3: Apr 11 is outside the window
+    const withOverride = findHolidayMatch(new Date(2025, 3, 11), 3)
     expect(withOverride?.holiday.id).not.toBe('easter')
   })
 

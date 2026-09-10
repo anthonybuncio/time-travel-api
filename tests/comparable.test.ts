@@ -80,10 +80,12 @@ describe('getComparableDate', () => {
     if ('error' in withDefault) return
     expect(withDefault.method).not.toBe('holiday-window')
 
+    // At a wide override, Tax Day (Apr 15, −14 days) is closer than Easter
+    // (Apr 20, −19 days) and wins
     const withWide = getComparableDate({ date: '2025-04-01', targetYear: 2024, windowDays: 20 })
     if ('error' in withWide) return
     expect(withWide.method).toBe('holiday-window')
-    expect(withWide.holiday?.id).toBe('easter')
+    expect(withWide.holiday?.id).toBe('tax-day')
   })
 })
 
