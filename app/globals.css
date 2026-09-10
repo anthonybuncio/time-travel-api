@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: oklch(14% 0.006 75);
+  --panel: oklch(19% 0.009 75);
+  --border: oklch(30% 0.014 75);
+  --foreground: oklch(93% 0.006 80);
+  --muted: oklch(68% 0.014 78);
+  --accent: oklch(80% 0.13 195);
+  --accent-glow: oklch(88% 0.12 195);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-panel: var(--panel);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-plex-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 38%,
+    color-mix(in oklch, var(--accent) 16%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.icon-glow {
+  filter: drop-shadow(
+    0 0 50px color-mix(in oklch, var(--accent-glow) 55%, transparent)
+  );
+}
+
+@keyframes materialize {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .materialize {
+    animation: materialize 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .materialize-delay-1 {
+    animation-delay: 140ms;
+  }
+  .materialize-delay-2 {
+    animation-delay: 300ms;
+  }
+  .materialize-delay-3 {
+    animation-delay: 460ms;
+  }
+  .materialize-delay-4 {
+    animation-delay: 600ms;
+  }
 }
