@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -14,8 +14,8 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Time Travel API",
-  description: "Holiday-aware date mapping across years.",
+  title: "Time Travel API - Business focused date mapping",
+  description: "Business focused date mapping across years.",
   icons: {
     icon: "/teleport-icon.svg",
   },
