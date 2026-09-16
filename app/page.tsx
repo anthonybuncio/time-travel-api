@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="hero-glow relative flex min-h-screen flex-1 flex-col items-center justify-center px-6 py-24">
       <a
-        href="https://github.com/anthonybuncio"
+        href="https://github.com/anthonybuncio/time-travel-api"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="View anthonybuncio on GitHub"
